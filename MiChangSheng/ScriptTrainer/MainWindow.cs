@@ -20,13 +20,11 @@ namespace ScriptTrainer
         public static MainWindow instance;
         public static bool initialized = false;
         public static bool _optionToggle = false;
-        private static TooltipGUI toolTipComp = null;
         public static KBEngine.Avatar player;   //获取玩家
 
         // UI
         public static AssetBundle testAssetBundle = null;
         public static GameObject canvas = null;
-        private static bool isVisible = false;
         private static GameObject uiPanel = null;
         private static readonly int width = Mathf.Min(Screen.width, 740);
         private static readonly int height = (Screen.height < 400) ? Screen.height : (450);
@@ -102,7 +100,7 @@ namespace ScriptTrainer
             {
                 player = Tools.instance.getPlayer();    // 获取玩家 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 initialized = false;
                 return;
@@ -547,7 +545,6 @@ namespace ScriptTrainer
 
                 #endregion
 
-                isVisible = true;
 
                 //log.LogMessage("Complete!");
                 canvas.SetActive(optionToggle);
