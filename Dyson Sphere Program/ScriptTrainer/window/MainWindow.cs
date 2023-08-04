@@ -29,7 +29,7 @@ namespace ScriptTrainer
 
 
         // 变量
-        public static Player player;
+        public static Player player = GameMain.mainPlayer;
         public static GameData gameData;
 
         // 窗口开关
@@ -68,16 +68,16 @@ namespace ScriptTrainer
             {
                 return;
             }
-            
+
             if (!GameMain.instance)
             {
                 Debug.Log("等待游戏初始化完成");
                 return;
             }
-            
+
             Console.WriteLine((bool)GameMain.instance);
 
-            
+
 
             CreateUI();
 
@@ -87,12 +87,13 @@ namespace ScriptTrainer
 
 
         // 创建UI
+        // ReSharper disable Unity.PerformanceAnalysis
         private static void CreateUI()
         {
             if (canvas == null)
             {
                 Debug.Log("开始创建UI");
-                
+
                 canvas = UIControls.createUICanvas();
                 Object.DontDestroyOnLoad(canvas);
                 canvas.name = "ScriptTrainer";
@@ -109,7 +110,7 @@ namespace ScriptTrainer
                     optionToggle = false;
                     canvas.SetActive(optionToggle);
                 };
-                
+
 
                 #region[基础功能]
 
@@ -128,7 +129,7 @@ namespace ScriptTrainer
                     player.mecha.droneCount = num;
 
                 }, 1, 1, 256);
-                
+
                 AddCount(BasicScripts, "无人机速度", (int)player.mecha.droneSpeed, (int num) =>
                 {
                     player.mecha.droneSpeed = num;
@@ -151,16 +152,20 @@ namespace ScriptTrainer
                 {
                     player.mecha.miningSpeed = num;
                 }, 1, 1);
+                hr();
+                AddCount(BasicScripts, "机甲制作速度", (int)player.mecha.replicateSpeed, (int num) =>
+                {
+                    player.mecha.replicateSpeed = num;
+                }, 1, 1);
+                hr();
 
-                //hr();
-                
-                //AddCount(BasicScripts, "研究速度", (int)player.mecha.researchPower, (int num) =>
-                //{
-                //    player.mecha.researchPower = num;
-                //});
+                AddCount(BasicScripts, "研究速度", (int)player.mecha.researchPower, (int num) =>
+                {
+                    player.mecha.researchPower = num;
+                });
 
                 // ==================== 按钮功能 ====================
-                hr();                
+                hr();
                 AddButton(BasicScripts, "解锁所有科技", () =>
                 {
                     TechProto[] techs = LDB.techs.dataArray;
@@ -207,14 +212,25 @@ namespace ScriptTrainer
 
 
                 #endregion
+                #region[修改配方]
+                ResetCoordinates(true, true);
 
+                GameObject RecipeScripts = UIControls.createUIPanel(background.gameObject, "330", "630", null);
+                RecipeScripts.GetComponent<Image>().color = UIControls.HTMLString2Color("#00000033");
+                RecipeScripts.name = "RecipeScripts";
+
+                new RecipeWindow(RecipeScripts);
+
+
+
+                #endregion
 
                 #region[创建导航栏]
 
                 DSNavigation dSNavigation = new DSNavigation(background.gameObject);
                 dSNavigation.AddTab("基础功能", BasicScripts, true);
                 dSNavigation.AddTab("添加物品", ItemScripts);
-
+                dSNavigation.AddTab("配方修改", RecipeScripts);
                 dSNavigation.Create();
 
                 #endregion
@@ -223,14 +239,14 @@ namespace ScriptTrainer
                 ByWindow by = new ByWindow();
                 by.init(background.gameObject);
 
-                
+
 
                 #endregion
 
 
                 Debug.Log("修改器UI初始化完成");
                 Debug.Log($"使用{ScriptTrainer.ShowCounter.Value}键打开修改器");
-                
+
                 canvas.SetActive(optionToggle);
             }
         }
@@ -243,7 +259,7 @@ namespace ScriptTrainer
 
         #region[添加组件]
         // 创建标题
-        public static GameObject AddTitle(GameObject panel,string Title)
+        public static GameObject AddTitle(GameObject panel, string Title)
         {
 
             Sprite txtBgSprite = UIControls.createSpriteFrmTexture(UIControls.createDefaultTexture("#7AB900FF"));
@@ -302,7 +318,7 @@ namespace ScriptTrainer
 
             // - 按钮
             UIButton minusUIButton = count.Find("-").GetComponent<UIButton>();
-            
+
             minusUIButton.onClick += (int a) =>
             {
                 value -= step;
@@ -352,7 +368,7 @@ namespace ScriptTrainer
 
         }
 
-       
+
 
         // 重置坐标
         public static void ResetCoordinates(bool x, bool y = false)

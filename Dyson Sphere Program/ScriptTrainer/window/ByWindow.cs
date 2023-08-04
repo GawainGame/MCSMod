@@ -22,6 +22,7 @@ namespace ScriptTrainer
 
 
         
+        // ReSharper disable Unity.PerformanceAnalysis
         public void init(GameObject canvas)
         {
             GameObject By = UIControls.createUIPanel(canvas, "40", "250", null);
