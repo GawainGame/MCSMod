@@ -29,7 +29,7 @@ namespace ScriptTrainer
             #endregion
 
             ShowCounter = Config.Bind("修改器快捷键", "Key", new KeyboardShortcut(KeyCode.Home));
-            log.LogMessage("脚本已启动");
+            //log.LogMessage("脚本已启动");
 
         }
 
