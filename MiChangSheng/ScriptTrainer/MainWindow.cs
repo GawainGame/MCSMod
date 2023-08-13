@@ -110,7 +110,7 @@ namespace ScriptTrainer
 
             if (canvas == null && player != null)
             {
-                Debug.Log("创建 UI 元素");
+                //Debug.Log("创建 UI 元素");
 
                 canvas = UIControls.createUICanvas();
                 Object.DontDestroyOnLoad(canvas);
@@ -548,8 +548,8 @@ namespace ScriptTrainer
 
                 //log.LogMessage("Complete!");
                 canvas.SetActive(optionToggle);
-                Debug.Log("修改器初始化完成!");
-                Debug.Log($"按{main.ShowCounter.Value.ToString()}可开关修改器菜单");
+                //Debug.Log("修改器初始化完成!");
+                //Debug.Log($"按{main.ShowCounter.Value.ToString()}可开关修改器菜单");
             }
             else
             {

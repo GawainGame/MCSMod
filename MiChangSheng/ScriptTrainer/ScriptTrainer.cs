@@ -5,26 +5,27 @@ using UnityEngine;
 
 namespace ScriptTrainer
 {
-    [BepInPlugin("aoe.top.plugins.ScriptTrainer", "觅长生 内置修改器", "2.1.0.0")]
+    [BepInPlugin("aoe.top.plugins.ScriptTrainer", "内置修改器", "3.1.0.0")]
     public class main : BaseUnityPlugin
     {
         // 窗口相关
         MainWindow mw;
 
         private static BepInEx.Logging.ManualLogSource log;
+        private static Harmony ScriptTrainerInstance;
         // 启动按键
-        public static ConfigEntry<BepInEx.Configuration.KeyboardShortcut> ShowCounter { get; set; }
+        public static ConfigEntry<KeyboardShortcut> ShowCounter { get; set; }
 
         public void Awake()
         {
             mw = new MainWindow();
             log = Logger;
         }
-        
+
         public void Start()
         {
             #region[注入游戏补丁]
-            Harmony.CreateAndPatchAll(typeof(ScriptPatch), null);
+            ScriptTrainerInstance = Harmony.CreateAndPatchAll(typeof(ScriptPatch));
             //Harmony.CreateAndPatchAll(typeof(UnityGameUI.WindowDragHandler), null);
             #endregion
 
@@ -47,7 +48,7 @@ namespace ScriptTrainer
             {
                 if (!MainWindow.initialized)
                 {
-                    Debug.Log("创建窗口失败,未找到玩家");
+                    //Debug.Log("创建窗口失败,未找到玩家");
                     Debug.Log("请先加载存档进入游戏");
                     return;
                 }
@@ -68,6 +69,7 @@ namespace ScriptTrainer
             // 销毁
             MainWindow.canvas?.SetActive(false);
             MainWindow.canvas = null;
+            ScriptTrainerInstance.UnpatchAll();
         }
     }
 }
