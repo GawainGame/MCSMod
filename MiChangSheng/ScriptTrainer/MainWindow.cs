@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using Steamworks;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityGameUI;
 using Navigation = UnityGameUI.Navigation;
@@ -145,7 +142,7 @@ namespace ScriptTrainer
 
 
                 #region[创建标题 和 关闭按钮]
-                AddTitle(background,"【觅长生】内置修改器 By:小莫");
+                AddTitle(background,"内置修改器");
 
                 GameObject closeButton = UIControls.createUIButton(uiPanel, "#B71C1CFF", "X", () =>
                 {

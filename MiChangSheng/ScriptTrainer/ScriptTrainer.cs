@@ -69,7 +69,7 @@ namespace ScriptTrainer
             // 销毁
             MainWindow.canvas?.SetActive(false);
             MainWindow.canvas = null;
-            ScriptTrainerInstance.UnpatchAll();
+            ScriptTrainerInstance?.UnpatchAll();
         }
     }
 }
