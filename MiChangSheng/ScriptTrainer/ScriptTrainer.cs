@@ -67,9 +67,16 @@ namespace ScriptTrainer
             //AssetBundle.UnloadAllAssetBundles(true);
 
             // 销毁
-            MainWindow.canvas?.SetActive(false);
-            MainWindow.canvas = null;
-            ScriptTrainerInstance?.UnpatchAll();
+            try
+            {
+                MainWindow.canvas?.SetActive(false);
+                MainWindow.canvas = null;
+                ScriptTrainerInstance?.UnpatchAll();
+            }
+            catch (System.Exception)
+            {
+
+            }
         }
     }
 }

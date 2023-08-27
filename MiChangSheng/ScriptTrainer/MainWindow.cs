@@ -385,7 +385,7 @@ namespace ScriptTrainer
                             player.joinMenPai(jsonData.instance.CyShiLiNameData.list[index]["id"].I);
                             //player.menpai = index;
                             Debug.Log("宗门已修改为" + shiliList[index]);
-                        });
+                        }, PlayerEx.Player.menPai);
                     }
                     {
                         List<string> ChengHao = new List<string> { "无" };
@@ -393,10 +393,14 @@ namespace ScriptTrainer
                         {
                             ChengHao.Add(item["Name"].Str);
                         }
+                        var zhiWei = PlayerEx.GetMenPaiChengHao();
+                        var zhiWeiId = 0;
+                        if (ChengHao.Contains(zhiWei))
+                        {
+                            zhiWeiId = ChengHao.IndexOf(zhiWei);
+                        }
                         AddDropdown("修改职位", 150, ChengHao, MenPaiScripts, (int index) =>
                         {
-
-
                             int shiLiID = player.menPai;
                             int chengHaoLevel = jsonData.instance.ChengHaoJsonData.list[index]["id"].I;
 
@@ -410,7 +414,7 @@ namespace ScriptTrainer
                             player.SetChengHaoId(chengHaoLevel);
 
                             Debug.Log("职位已修改为" + PlayerEx.GetMenPaiChengHao());
-                        });
+                        }, zhiWeiId);
                     }
                 }
                 hr(10);
@@ -649,7 +653,7 @@ namespace ScriptTrainer
         }
 
         // 添加下拉框
-        public GameObject AddDropdown(string Text, int width, List<string> options, GameObject panel, UnityAction<int> action)
+        public GameObject AddDropdown(string Text, int width, List<string> options, GameObject panel, UnityAction<int> action, int index = 0)
         {
             // 计算x轴偏移
             elementX += width / 2 - 30;
@@ -672,7 +676,7 @@ namespace ScriptTrainer
             Sprite dropdownCheckmarkSprite = UIControls.createSpriteFrmTexture(UIControls.createDefaultTexture("#8C9EFFFF"));   // 选中时的颜色
             Sprite dropdownMaskSprite = UIControls.createSpriteFrmTexture(UIControls.createDefaultTexture("#E65100FF"));        // 不知道是哪的颜色
             Color LabelColor = UIControls.HTMLString2Color("#EFEBE9FF");
-            GameObject uiDropDown = UIControls.createUIDropDown(panel, dropdownBgSprite, dropdownScrollbarSprite, dropdownDropDownSprite, dropdownCheckmarkSprite, dropdownMaskSprite, options, LabelColor);
+            GameObject uiDropDown = UIControls.createUIDropDown(panel, dropdownBgSprite, dropdownScrollbarSprite, dropdownDropDownSprite, dropdownCheckmarkSprite, dropdownMaskSprite, options, LabelColor, index);
             Object.DontDestroyOnLoad(uiDropDown);
             uiDropDown.GetComponent<RectTransform>().localPosition = new Vector3(elementX, elementY, 0);
 

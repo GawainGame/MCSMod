@@ -49,14 +49,14 @@ namespace ScriptTrainer
             npc = UINPCJiaoHu.Inst.NowJiaoHuNPC;
             if (npc == null)
             {
-                Sprite txtBgSprite = UIControls.createSpriteFrmTexture(UIControls.createDefaultTexture("#7AB900FF"));
-                GameObject uiText = UIControls.createUIText(NpcPanel, txtBgSprite, "#FFFFFFFF");
-                uiText.GetComponent<Text>().text = "未选择或未找到NPC";
-                uiText.GetComponent<RectTransform>().localPosition = new Vector3(elementX, elementY, 0);
+                //Sprite txtBgSprite = UIControls.createSpriteFrmTexture(UIControls.createDefaultTexture("#7AB900FF"));
+                //GameObject uiText = UIControls.createUIText(NpcPanel, txtBgSprite, "#FFFFFFFF");
+                //uiText.GetComponent<Text>().text = "未选择或未找到NPC";
+                //uiText.GetComponent<RectTransform>().anchoredPosition = new Vector3(elementX, elementY, 0);
 
-                // 设置字体样式为h3小标题
-                uiText.GetComponent<Text>().fontSize = 14;
-                uiText.GetComponent<Text>().fontStyle = FontStyle.Bold;
+                //// 设置字体样式为h3小标题
+                //uiText.GetComponent<Text>().fontSize = 14;
+                //uiText.GetComponent<Text>().fontStyle = FontStyle.Bold;
 
                 return;
             }

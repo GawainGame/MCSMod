@@ -71,7 +71,6 @@ namespace ScriptTrainer
             // 创建物品列表
             container();
 
-
             // 创建分页
             pageBar(Panel);
         }
@@ -189,7 +188,7 @@ namespace ScriptTrainer
             {
                 
                 page--;
-                if (page <= 0) page = 1;
+                if (page <= 0) page = maxPage;
                 container();
                 uiText.GetComponent<Text>().text = uiText_text;
             }, new Vector3());
@@ -200,7 +199,7 @@ namespace ScriptTrainer
             GameObject nextBtn = UIControls.createUIButton(pageObj, backgroundColor, "下一页", () =>
             {
                 page++;
-                if (page >= maxPage) page = maxPage;
+                if (page >= maxPage) page = 1;
                 container();
                 uiText.GetComponent<Text>().text = uiText_text;
             });
@@ -312,7 +311,7 @@ namespace ScriptTrainer
 
             // 对 DataList 进行分页
             List<item> list = new List<item>();
-            int start = page * conunt;
+            int start = (page-1) * conunt;
             int end = start + conunt;
             for (int i = start; i < end; i++)
             {
@@ -326,7 +325,14 @@ namespace ScriptTrainer
                 }
             }
             maxPage = ItemData.Count / conunt;
-
+            if (ItemData.Count % conunt != 0)
+            {
+                maxPage += 1;
+            }
+            if (maxPage == 0)
+            {
+                maxPage = 1;
+            }
             return list;
         }
 
