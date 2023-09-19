@@ -12,7 +12,7 @@ using Object = UnityEngine.Object;
 
 namespace ScriptTrainer
 {
-    internal class ItemWindow: MonoBehaviour
+    internal class ItemWindow : MonoBehaviour
     {
         private static GameObject Panel;
         private static int initialX;
@@ -25,7 +25,8 @@ namespace ScriptTrainer
         private static List<GameObject> ItemButtons = new List<GameObject>();
         private static List<item> DataList
         {
-            get {
+            get
+            {
                 List<item> itemList = new List<item>();
                 foreach (KeyValuePair<string, JSONObject> item in jsonData.instance.ItemJsonData)
                 {
@@ -51,7 +52,7 @@ namespace ScriptTrainer
         }
         #endregion
 
-        public ItemWindow(GameObject panel, int x , int y)
+        public ItemWindow(GameObject panel, int x, int y)
         {
             Panel = panel;
             initialX = elementX = x + 50;
@@ -81,7 +82,7 @@ namespace ScriptTrainer
         private void searchBar(GameObject panel)
         {
             elementY += 10;
-            
+
             // label
             Sprite txtBgSprite = UIControls.createSpriteFrmTexture(UIControls.createDefaultTexture("#7AB900FF"));
             GameObject uiText = UIControls.createUIText(panel, txtBgSprite, "#FFFFFFFF");
@@ -129,8 +130,8 @@ namespace ScriptTrainer
             // 坐标偏移
             elementX += 60;
 
-           
-            
+
+
             List<string> options = new List<string> { "全部" };
             // 遍历 ItemTypes
             foreach (var item in Enum.GetValues(typeof(ItemTypes)))
@@ -151,7 +152,7 @@ namespace ScriptTrainer
 
             // 下拉框选中时触发方法
             uiDropDown.GetComponent<Dropdown>().onValueChanged.AddListener((int call) =>
-            {                
+            {
                 type = call == 0 ? (ItemType)999 : (ItemType)call - 1;
                 page = 1;
                 container();
@@ -159,7 +160,7 @@ namespace ScriptTrainer
             });
 
         }
-        
+
         // 分页
         private void pageBar(GameObject panel)
         {
@@ -170,7 +171,7 @@ namespace ScriptTrainer
 
             // 当前页数 / 总页数
             Sprite txtBgSprite = UIControls.createSpriteFrmTexture(UIControls.createDefaultTexture("#7AB900FF"));
-            
+
             if (uiText == null)
             {
                 uiText = UIControls.createUIText(pageObj, txtBgSprite, "#ffFFFFFF");
@@ -180,13 +181,13 @@ namespace ScriptTrainer
                 uiText.GetComponent<Text>().fontSize = 20;
                 uiText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
             }
-           
+
 
             // 上一页
             string backgroundColor = "#8C9EFFFF";
             GameObject prevBtn = UIControls.createUIButton(pageObj, backgroundColor, "上一页", () =>
             {
-                
+
                 page--;
                 if (page <= 0) page = maxPage;
                 container();
@@ -207,6 +208,10 @@ namespace ScriptTrainer
             nextBtn.GetComponent<RectTransform>().localPosition = new Vector3(100, 0, 0);
         }
 
+        private static string Color(string msg, string color)
+        {
+            return $"<color={color}>{msg}</color>";
+        }
         private static void container()
         {
             //Debug.Log($"x:{elementX}, y:{elementY}");
@@ -228,12 +233,12 @@ namespace ScriptTrainer
             int num = 0;
             foreach (var item in GetItemData())
             {
-                var btn = createItemButton(item.itemNameCN, ItemPanel, item.itemIcon, item.quality,  () =>
+                var btn = createItemButton(item.itemNameCN, ItemPanel, item.itemIcon, item.quality, () =>
                 {
                     UIWindows.SpawnInputDialog($"您想获取多少个{item.itemNameCN}？", "添加", "1", (string count) =>
                     {
-                        Debug.Log($"已添加{count}个{item.itemNameCN}到背包");
-                        
+                        Debug.Package($"已添加{Color(count.ToString(), "#569CD6")}个{Color(item.itemNameCN, "#9CDCFE")}到背包");
+
                         KBEngine.Avatar player = Tools.instance.getPlayer();    // 获取玩家 
                         player.addItem(item.itemID, Tools.CreateItemSeid(item.itemID), count.ConvertToIntDef(1));
                         //Singleton.inventory.AddItem(item.itemID);
@@ -248,7 +253,7 @@ namespace ScriptTrainer
                 }
             }
         }
-        
+
         private static GameObject createItemButton(string text, GameObject panel, Texture2D itemIcon, int quality, UnityAction action)
         {
             // 根据品质设置背景颜色
@@ -286,7 +291,7 @@ namespace ScriptTrainer
             elementX += 200;
 
             return background;
-           
+
         }
 
         private static void hr()
@@ -305,13 +310,14 @@ namespace ScriptTrainer
             {
                 ItemData = FilterItemData(ItemData);
             }
-            if (type != (ItemType)999){
+            if (type != (ItemType)999)
+            {
                 ItemData = FilterItemDataByType(ItemData);
             }
 
             // 对 DataList 进行分页
             List<item> list = new List<item>();
-            int start = (page-1) * conunt;
+            int start = (page - 1) * conunt;
             int end = start + conunt;
             for (int i = start; i < end; i++)
             {
@@ -366,7 +372,7 @@ namespace ScriptTrainer
             }
 
             List<item> list = new List<item>();
-            
+
             foreach (var item in dataList)
             {
                 if ((int)item.itemType == (int)type)

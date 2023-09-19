@@ -15,7 +15,7 @@ namespace ScriptTrainer
     {
         public static UINPCData npc;            // 获取Npc
         private static GameObject Panel;
-        private static GameObject NpcPanel;        
+        private static GameObject NpcPanel;
         private static int initialX;
         private static int initialY;
         private static int elementX;
@@ -29,14 +29,14 @@ namespace ScriptTrainer
             initialY = elementY = y;
             Initialize();
         }
-        
+
         public static void Initialize()
         {
             //Object.Destroy(Panel);
-            
+
             ResetCoordinates(true);
             RefreshNpcData();
-            
+
         }
 
         public static void RefreshNpcData()
@@ -61,14 +61,14 @@ namespace ScriptTrainer
                 return;
             }
 
-            
+
             AddH3("Npc资料", NpcPanel);
             {
                 AddLabel($"名称：{npc.Name}", NpcPanel);
                 AddLabel($"年龄：{npc.Age}", NpcPanel);
                 AddLabel($"寿元：{npc.ShouYuan}", NpcPanel);
                 AddLabel($"气血：{npc.HP}", NpcPanel);
-                AddLabel($"资质：{npc.ZiZhi}", NpcPanel);                
+                AddLabel($"资质：{npc.ZiZhi}", NpcPanel);
             }
             hr(10);
             {
@@ -96,7 +96,7 @@ namespace ScriptTrainer
 
                             NPCFactory npcf = new NPCFactory();
                             npcf.SetNpcLevel(npc.ID, level);
-                            Debug.Log($"已修改{npc.Name}的修为为{options[level]}");
+                            Debug.Success($"已修改{npc.Name}的修为为{options[level]}");
                         }
                     });
                 }
@@ -118,13 +118,13 @@ namespace ScriptTrainer
                 AddButton("设为道侣", Panel, () =>
                 {
                     MainWindow.player.DaoLvId.Add(npc.ID);
-                    Debug.Log($"你已和{npc.Name}成为道侣");
+                    Debug.Success($"你已和{npc.Name}成为道侣");
                 });
             }
         }
 
         #region[Npc操作]
-        
+
         private static void ChangeNpcAge(int NpcID, int age)
         {
 
@@ -221,7 +221,7 @@ namespace ScriptTrainer
 
             elementX += width / 2 + 60;
             return uiDropDown;
-        }        
+        }
 
         // 添加小标题
         public static GameObject AddH3(string text, GameObject panel)
@@ -266,7 +266,7 @@ namespace ScriptTrainer
             elementY -= 50 + offsetY;
 
         }
-        
+
         // 重置坐标
         public static void ResetCoordinates(bool x, bool y = false)
         {

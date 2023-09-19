@@ -142,7 +142,7 @@ namespace ScriptTrainer
 
 
                 #region[创建标题 和 关闭按钮]
-                AddTitle(background,"内置修改器");
+                AddTitle(background, "内置修改器");
 
                 GameObject closeButton = UIControls.createUIButton(uiPanel, "#B71C1CFF", "X", () =>
                 {
@@ -174,16 +174,16 @@ namespace ScriptTrainer
                     });
                     AddButton("海域声望", BasicScripts, () =>
                     {
-                        Scripts.AddShengWang(19,"海域");
+                        Scripts.AddShengWang(19, "海域");
                     });
                     AddButton("龙族声望", BasicScripts, () =>
                     {
-                        
+
                         Scripts.AddShengWang(23, "龙族");
                     });
                     AddButton("白帝楼声望", BasicScripts, () =>
                     {
-                        Scripts.AddShengWang(24,"白帝楼");
+                        Scripts.AddShengWang(24, "白帝楼");
                     });
                     AddButton("风雨楼声望", BasicScripts, () =>
                     {
@@ -267,22 +267,22 @@ namespace ScriptTrainer
                     AddInputField("年龄", 150, player.age.ToString(), PlayerAttributes, (string text) =>
                     {
                         player.age = (uint)text.ConvertToIntDef(16);
-                        Debug.Log("年龄已修改为" + player.age);
+                        Debug.Success("年龄已修改为" + player.age);
                     });
                     AddInputField("寿元", 150, player.shouYuan.ToString(), PlayerAttributes, (string text) =>
                     {
                         player.shouYuan = (uint)text.ConvertToIntDef(200);
-                        Debug.Log("寿元已修改为" + player.shouYuan);
+                        Debug.Success("寿元已修改为" + player.shouYuan);
                     });
                     AddInputField("资质", 150, player.ZiZhi.ToString(), PlayerAttributes, (string text) =>
                     {
                         player.ZiZhi = text.ConvertToIntDef(100);
-                        Debug.Log("资质已修改为" + player.ZiZhi);
+                        Debug.Success("资质已修改为" + player.ZiZhi);
                     });
                     AddInputField("神识", 150, player.shengShi.ToString(), PlayerAttributes, (string text) =>
                     {
                         player.shengShi = text.ConvertToIntDef(100);
-                        Debug.Log("神识已修改为" + player.shengShi);
+                        Debug.Success("神识已修改为" + player.shengShi);
                     });
                 }
                 hr(10);
@@ -291,22 +291,22 @@ namespace ScriptTrainer
                     AddInputField("悟性", 150, player.wuXin.ToString(), PlayerAttributes, (string text) =>
                     {
                         player.wuXin = (uint)text.ConvertToIntDef(100);
-                        Debug.Log("悟性已修改为" + player.wuXin);
+                        Debug.Success("悟性已修改为" + player.wuXin);
                     });
                     AddInputField("遁速", 150, player.dunSu.ToString(), PlayerAttributes, (string text) =>
                     {
                         player.dunSu = text.ConvertToIntDef(100);
-                        Debug.Log("遁速已修改为" + player.dunSu);
+                        Debug.Success("遁速已修改为" + player.dunSu);
                     });
                     AddInputField("心境", 150, player.xinjin.ToString(), PlayerAttributes, (string text) =>
                     {
                         player.xinjin = text.ConvertToIntDef(100);
-                        Debug.Log("心境已修改为" + player.xinjin);
+                        Debug.Success("心境已修改为" + player.xinjin);
                     });
                     AddInputField("丹毒", 150, player.Dandu.ToString(), PlayerAttributes, (string text) =>
                     {
                         player.Dandu = text.ConvertToIntDef(100);
-                        Debug.Log("丹毒已修改为" + player.Dandu);
+                        Debug.Success("丹毒已修改为" + player.Dandu);
                     });
                 }
                 hr(10);
@@ -314,18 +314,18 @@ namespace ScriptTrainer
                     AddInputField("灵感", 150, player.LingGan.ToString(), PlayerAttributes, (string text) =>
                     {
                         player.LingGan = text.ConvertToIntDef(100);
-                        Debug.Log("灵感已修改为" + player.LingGan);
+                        Debug.Success("灵感已修改为" + player.LingGan);
                     });
                     AddInputField("修为", 150, player.exp.ToString(), PlayerAttributes, (string text) =>
                     {
                         player.exp = (uint)text.ConvertToIntDef(100000);
-                        Debug.Log("修为已修改为" + player.exp);
+                        Debug.Success("修为已修改为" + player.exp);
                     });
                     AddInputField("生命值", 150, player.HP_Max.ToString(), PlayerAttributes, (string text) =>
                     {
                         player.HP_Max = text.ConvertToIntDef(1000);
                         player.HP = player.HP_Max;
-                        Debug.Log("最大生命值已修改为" + player.HP_Max);
+                        Debug.Success("最大生命值已修改为" + player.HP_Max);
                     });
                 }
                 hr();
@@ -346,7 +346,7 @@ namespace ScriptTrainer
                         AddInputField(item.name, 150, player.LingGeng[item.id].ToString(), PlayerAttributes, (string text) =>
                         {
                             player.LingGeng[item.id] = text.ConvertToIntDef(100);
-                            Debug.Log(item.name + "灵根已修改为" + player.LingGeng[item.id]);
+                            Debug.Success(item.name + "灵根已修改为" + player.LingGeng[item.id]);
                         });
                         if (item.id == 3)
                         {
@@ -384,7 +384,7 @@ namespace ScriptTrainer
                         {
                             player.joinMenPai(jsonData.instance.CyShiLiNameData.list[index]["id"].I);
                             //player.menpai = index;
-                            Debug.Log("宗门已修改为" + shiliList[index]);
+                            Debug.Success("宗门已修改为" + shiliList[index]);
                         }, PlayerEx.Player.menPai);
                     }
                     {
@@ -413,7 +413,7 @@ namespace ScriptTrainer
                             // 设置ID后会自动修改宗门每月俸禄
                             player.SetChengHaoId(chengHaoLevel);
 
-                            Debug.Log("职位已修改为" + PlayerEx.GetMenPaiChengHao());
+                            Debug.Success("职位已修改为" + PlayerEx.GetMenPaiChengHao());
                         }, zhiWeiId);
                     }
                 }
@@ -449,7 +449,7 @@ namespace ScriptTrainer
                         {
                             player.wuDaoMag.SetWuDaoEx(item["id"].I, text.ConvertToIntDef(1000));
 
-                            Debug.Log($"悟道{item["name"].Str}修改为{text}");
+                            Debug.Success($"悟道{item["name"].Str}修改为{text}");
                         });
 
                         num++;
@@ -468,12 +468,12 @@ namespace ScriptTrainer
                         {
                             player.wuDaoMag.SetWuDaoEx(item["id"].I, 150000);
                         }
-                        Debug.Pop("所有悟道已全部设置为最高");
+                        Debug.Success("所有悟道已全部设置为最高");
                     });
                     AddInputField("悟道点", 150, player._WuDaoDian.ToString(), WuDaoScripts, (string text) =>
                     {
                         player.WuDaoDian = text.ConvertToIntDef(100);
-                        Debug.Log($"已将悟道点修改为{player.WuDaoDian}");
+                        Debug.Success($"已将悟道点修改为{player.WuDaoDian}");
                     });
                     hr(10);
                     {
@@ -484,7 +484,7 @@ namespace ScriptTrainer
                             {
                                 player.wuDaoMag.SetWuDaoEx(item["id"].I, 150000);
 
-                                Debug.Pop($"已设置{item["name"].Str}悟道为最高");
+                                Debug.Success($"已设置{item["name"].Str}悟道为最高");
                             });
                             num++;
                             if (num % 6 == 0)
@@ -562,7 +562,7 @@ namespace ScriptTrainer
         #region[添加组件]
 
         // 添加标题
-        public static GameObject AddTitle(GameObject parent,string Title)
+        public static GameObject AddTitle(GameObject parent, string Title)
         {
             GameObject TitleBackground = UIControls.createUIPanel(parent, "30", (width - 20).ToString(), null);
             TitleBackground.GetComponent<Image>().color = UIControls.HTMLString2Color("#2D2D30FF");

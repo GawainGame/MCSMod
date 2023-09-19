@@ -49,7 +49,7 @@ namespace ScriptTrainer
                 if (!MainWindow.initialized)
                 {
                     //Debug.Log("创建窗口失败,未找到玩家");
-                    Debug.Log("请先加载存档进入游戏");
+                    Debug.Tip("请先加载存档进入游戏");
                     return;
                 }
 

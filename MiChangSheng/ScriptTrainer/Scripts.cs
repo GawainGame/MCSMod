@@ -9,11 +9,12 @@ using UnityGameUI;
 
 namespace ScriptTrainer
 {
-    public class Scripts: MonoBehaviour
+    public class Scripts : MonoBehaviour
     {
         public static void AddMoney()
         {
-            UIWindows.SpawnInputDialog("您想添加多少灵石？", "添加", "1000", (string money) => {
+            UIWindows.SpawnInputDialog("您想添加多少灵石？", "添加", "1000", (string money) =>
+            {
                 //ms.Earn(money.ConvertToIntDef(100000), 14);
                 KBEngine.Avatar player = Tools.instance.getPlayer();
                 if (player != null)
@@ -26,7 +27,7 @@ namespace ScriptTrainer
                 }
                 else
                 {
-                    Debug.Log("玩家不存在");
+                    Debug.Tip("玩家不存在");
                 }
             });
         }
@@ -46,7 +47,7 @@ namespace ScriptTrainer
                 }
                 else
                 {
-                    Debug.Log("玩家不存在");
+                    Debug.Tip("玩家不存在");
                 }
             });
         }
@@ -67,35 +68,36 @@ namespace ScriptTrainer
                 }
                 else
                 {
-                    Debug.Log("玩家不存在");
+                    Debug.Tip("玩家不存在");
                 }
             });
         }
-        
+
         public static void MaxExp()
         {
             KBEngine.Avatar player = Tools.instance.getPlayer();
             player.exp = (ulong)jsonData.instance.LevelUpDataJsonData[player.level.ToString()]["MaxExp"].I;
             player.PlayerLvUP();
-            Debug.Pop("当前修为全满");
+            Debug.Success("当前修为全满");
         }
 
         public static void MaxHp()
         {
             KBEngine.Avatar player = Tools.instance.getPlayer();
             player.HP = player.HP_Max;
-            Debug.Pop("当前血量全满");
+            Debug.Success("当前血量全满");
         }
 
         public static void AddMenPaiShengWang()
         {
-            UIWindows.SpawnInputDialog("您想添加多少声望？", "添加", "1000", (string shengWang) => {
+            UIWindows.SpawnInputDialog("您想添加多少声望？", "添加", "1000", (string shengWang) =>
+            {
 
                 int n = shengWang.ConvertToIntDef(1000);
-                
+
                 PlayerEx.AddMenPaiShengWang(n);
-                Debug.Pop("门派声望添加了" + n);
-                
+                Debug.Add("门派声望添加了" + n);
+
             });
         }
     }
