@@ -1,12 +1,4 @@
-﻿using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-
-namespace ScriptTrainer
+﻿namespace ScriptTrainer
 {
     // 补丁注入相关
     public static class ScriptPatch
@@ -20,7 +12,5 @@ namespace ScriptTrainer
         public static bool setingsInfiniteSpace = false;
         public static bool setingsInfiniteServerplatz = false;
         #endregion
-
-        
     }
 }

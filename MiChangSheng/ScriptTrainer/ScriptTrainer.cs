@@ -42,8 +42,6 @@ namespace ScriptTrainer
             }
 
             // 切换UI开关
-            //if (ShowCounter.IsDown())
-            // if (new KeyboardShortcut(KeyCode.F9).IsDown())
             if (ShowCounter.Value.IsDown())
             {
                 if (!MainWindow.initialized)

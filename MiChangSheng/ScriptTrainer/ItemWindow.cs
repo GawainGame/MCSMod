@@ -189,7 +189,7 @@ namespace ScriptTrainer
             {
 
                 page--;
-                if (page <= 0) page = maxPage;
+                if (page < 1) page = maxPage;
                 container();
                 uiText.GetComponent<Text>().text = uiText_text;
             }, new Vector3());
@@ -200,7 +200,7 @@ namespace ScriptTrainer
             GameObject nextBtn = UIControls.createUIButton(pageObj, backgroundColor, "下一页", () =>
             {
                 page++;
-                if (page >= maxPage) page = 1;
+                if (page > maxPage) page = 1;
                 container();
                 uiText.GetComponent<Text>().text = uiText_text;
             });
@@ -257,14 +257,15 @@ namespace ScriptTrainer
         private static GameObject createItemButton(string text, GameObject panel, Texture2D itemIcon, int quality, UnityAction action)
         {
             // 根据品质设置背景颜色
-            string qualityColor = "#FFFFFFFF";
+            string nameColor = "#FFFFFFFF";
             switch (quality)
             {
-                case 1: qualityColor = "#81C784FF"; break;
-                case 2: qualityColor = "#29B6F6FF"; break;
-                case 3: qualityColor = "#B388FFFF"; break;
-                case 4: qualityColor = "#FFA726FF"; break;
-                case 5: qualityColor = "#FF8A80FF"; break;
+                case 1: nameColor = "#D8D8CAFF"; break;
+                case 2: nameColor = "#B3D951FF"; break;
+                case 3: nameColor = "#71DBFFFF"; break;
+                case 4: nameColor = "#EF6FFFFF"; break;
+                case 5: nameColor = "#FF9D43FF"; break;
+                case 6: nameColor = "#FF744DFF"; break;
             }
 
             // 创建一个背景
@@ -275,8 +276,8 @@ namespace ScriptTrainer
 
             // 名称
             Sprite txtBgSprite = UIControls.createSpriteFrmTexture(UIControls.createDefaultTexture("#7AB900FF"));
-            GameObject uiText = UIControls.createUIText(background, txtBgSprite, qualityColor);
-            uiText.GetComponent<Text>().text = text;
+            GameObject uiText = UIControls.createUIText(background, txtBgSprite, nameColor);
+            uiText.GetComponent<Text>().text = text + $" [{quality}]";
             uiText.GetComponent<RectTransform>().localPosition = new Vector3(0, -10, 0);
 
 
