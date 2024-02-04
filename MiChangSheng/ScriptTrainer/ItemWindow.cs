@@ -19,6 +19,7 @@ namespace ScriptTrainer
         private static int initialY;
         private static int elementX;
         private static int elementY;
+        private static int DefaultItemNumber = 1;
 
         #region[数据分页相关]
         private static GameObject ItemPanel;
@@ -235,12 +236,13 @@ namespace ScriptTrainer
             {
                 var btn = createItemButton(item.itemNameCN, ItemPanel, item.itemIcon, item.quality, () =>
                 {
-                    UIWindows.SpawnInputDialog($"您想获取多少个{item.itemNameCN}？", "添加", "1", (string count) =>
+                    UIWindows.SpawnInputDialog($"您想获取多少个{item.itemNameCN}？", "添加", DefaultItemNumber.ToString(), (string count) =>
                     {
-                        Debug.Package($"已添加{Color(count.ToString(), "#569CD6")}个{Color(item.itemNameCN, "#9CDCFE")}到背包");
-
+                        int itemCount = count.ConvertToIntDef(1);
+                        DefaultItemNumber = itemCount;
+                        Debug.Package($"已添加{Color(itemCount.ToString(), "#569CD6")}个{Color(item.itemNameCN, "#9CDCFE")}到背包");
                         KBEngine.Avatar player = Tools.instance.getPlayer();    // 获取玩家 
-                        player.addItem(item.itemID, Tools.CreateItemSeid(item.itemID), count.ConvertToIntDef(1));
+                        player.addItem(item.itemID, Tools.CreateItemSeid(item.itemID), itemCount);
                         //Singleton.inventory.AddItem(item.itemID);
                     });
                 });
